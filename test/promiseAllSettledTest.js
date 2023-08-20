@@ -10,11 +10,11 @@ const syncTest = () => {
   const p3 = new MyPromise((resolve, reject) => {
     resolve('p3')
   })
-  MyPromise.all([p1, p2, p3]).then(res => {
+  MyPromise.allSettled([p1, p2, p3]).then(res => {
     console.log(res);
   })
 }
-// syncTest()
+syncTest()
 
 const asyncTest = () => {
   const p1 = new MyPromise((resolve, reject) => {
@@ -32,7 +32,7 @@ const asyncTest = () => {
       resolve('p3 50ms')
     }, 50);
   })
-  MyPromise.all([p1, p2, p3]).then(res => {
+  MyPromise.allSettled([p1, p2, p3]).then(res => {
     console.log(res);
   })
 }
@@ -48,7 +48,7 @@ const rejectTest = () => {
   const p3 = new MyPromise((resolve, reject) => {
     resolve('p3')
   })
-  MyPromise.all([p1, p2, p3]).then(res => {
+  MyPromise.allSettled([p1, p2, p3]).then(res => {
     console.log(res);
   }, err => {
     console.log(err);
@@ -66,7 +66,7 @@ const errTest = () => {
   const p3 = new MyPromise((resolve, reject) => {
     resolve('p3')
   })
-  MyPromise.all([p1, p2, p3]).then(res => {
+  MyPromise.allSettled([p1, p2, p3]).then(res => {
     console.log(res);
   }, err => {
     console.log(err);
@@ -80,10 +80,10 @@ const originalValTest = () => {
   const p3 = new MyPromise((resolve, reject) => {
     resolve('p3')
   })
-  MyPromise.all([p1, p2, p3]).then(res => {
+  MyPromise.allSettled([p1, p2, p3]).then(res => {
     console.log(res);
   }, err => {
     console.log(err);
   })
 }
-originalValTest()
+// originalValTest()

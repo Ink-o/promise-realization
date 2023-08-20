@@ -138,11 +138,15 @@ class MyPromise {
   static all(promiseArr) {
     const resArr = []
     let idex = 0
-
+    
     return new MyPromise((resolve, reject) => {
       if (!isIterable(promiseArr)) {
         const err = `${(typeof promiseArr)} ${promiseArr} is not iterable (cannot read property Symbol(Symbol.iterator))`
         reject(new TypeError(err))
+        return
+      }
+      if (!promiseArr.length) {
+        resolve([])
         return
       }
       promiseArr.map((promise, index) => {
@@ -154,7 +158,7 @@ class MyPromise {
             formatResArr(res, index, resolve)
           }, reject)
         } else {
-          formatResArr(res, index, resolve)
+          formatResArr(promise, index, resolve)
         }
       })
     })
@@ -225,7 +229,6 @@ class MyPromise {
         return
       }
       promiseArr.forEach(item => {
-        console.log('item: ', item);
         if (isPromise(item)) {
           // 这里直接用类传入进来的resolve和reject方法就可以了
           // 里面是默认接收一个value/reason的
